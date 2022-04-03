@@ -1,0 +1,13 @@
+name: Action Sample
+on:
+  push:
+    branches:
+      - main
+  workflow-dispatch:
+
+jobs:
+  print-hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: execute echo command
+        run: echo "Hello world!"
