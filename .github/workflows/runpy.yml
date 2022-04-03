@@ -14,4 +14,4 @@ jobs:
         with:
           python-version: 3.8.0
       - name: run python
-        run: python helloworld.py
+        run: python ./helloworld.py
