@@ -1,0 +1,21 @@
+name: Git log
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  git-log:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: git setup
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "action@github.com"
+          git log --name-only --pretty=format:"commit %h: %s" > log.txt
+      - name: output
+        run: cat log.txt
+      - name: cleanup
+        run: rm log.txt
