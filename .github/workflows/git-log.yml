@@ -17,7 +17,7 @@ jobs:
           git config --local user.email "action@github.com"
       - name: log
         run: |
-          git log --name-only --pretty=format:"commit %h: %s" -1 > log.txt
+          git log --name-only -1 > log.txt
       - name: output
         run: cat log.txt
       - name: cleanup
