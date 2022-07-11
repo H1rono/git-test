@@ -10,14 +10,14 @@ jobs:
   git-log:
     runs-on: ubuntu-latest
     steps:
-      #- uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: git setup
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "action@github.com"
       - name: log
         run: |
-          git log --name-only -1 > log.txt
+          git log --stat -1 > log.txt
       - name: output
         run: cat log.txt
       - name: cleanup
