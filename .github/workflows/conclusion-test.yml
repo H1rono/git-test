@@ -1,0 +1,22 @@
+name: Workflow conclusion test
+
+on: [push]
+
+jobs:
+  usual:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print
+        runs: "echo 'Hello, world!'"
+  will-skip:
+    if: ${{ false }}
+    steps:
+      - name: print
+        runs: "echo 'something went wrong'"
+  will-cancel:
+    steps:
+      - name: delay
+        runs: "sleep 60"
+      - name: print
+        runs: "echo 'you could not cancel'"
+
