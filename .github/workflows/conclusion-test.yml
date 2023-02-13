@@ -10,10 +10,12 @@ jobs:
         run: "echo 'Hello, world!'"
   will-skip:
     if: ${{ false }}
+    runs-on: ubuntu-latest
     steps:
       - name: print
         run: "echo 'something went wrong'"
   will-cancel:
+    runs-on: ubuntu-latest
     steps:
       - name: delay
         run: "sleep 60"
