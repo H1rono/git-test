@@ -1,0 +1,19 @@
+name: Multiline command
+
+on:
+  push:
+
+jobs:
+  multiline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo test
+        run: |
+          echo Hello \
+            world
+      - name: curl test
+        run: |
+          curl -sSLO \
+            https://github.com/ \
+            H1rono.png
+          ls
