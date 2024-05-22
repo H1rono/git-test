@@ -13,8 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: cat /etc/os-release
+      - uses: actions/checkout@v4
+      - run: ls
   with-container:
     runs-on: ubuntu-latest
     container: alpine
     steps:
       - run: cat /etc/os-release
+      - uses: actions/checkout@v4
+      - run: ls
