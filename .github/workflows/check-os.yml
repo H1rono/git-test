@@ -1,0 +1,20 @@
+name: Check os
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  without-container:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat /etc/os-release
+  with-container:
+    runs-on: ubuntu-latest
+    container: alpine
+    steps:
+      - run: cat /etc/os-release
