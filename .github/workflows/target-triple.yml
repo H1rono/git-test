@@ -10,7 +10,7 @@ jobs:
       - run: rustup show
       - id: target-triple
         run: |
-          echo "target-triple=$(rustup target list | head -n 1)" >> "$GITHUB_OUTPUT"
+          echo "target-triple=$(rustc -Vv | awk '/^host/ { print $2 }')" >> "$GITHUB_OUTPUT"
       - run: echo "target triple is $TARGET_TRIPLE"
         env:
           TARGET_TRIPLE: ${{ steps.target-triple.outputs.target-triple }}
