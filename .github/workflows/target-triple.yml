@@ -1,0 +1,16 @@
+name: Check target triple
+
+on:
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - run: rustup show
+      - id: target-triple
+        run: |
+          echo "target-triple=$(rustup target list | head -n 1)" >> "$GITHUB_OUTPUT"
+      - run: echo "target triple is $TARGET_TRIPLE"
+        env:
+          TARGET_TRIPLE: ${{ steps.target-triple.outputs.target-triple }}
