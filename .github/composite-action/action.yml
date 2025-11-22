@@ -25,6 +25,10 @@ runs:
       id: random-number-generator
       run: echo "random-number=$RANDOM" >> $GITHUB_OUTPUT
       shell: bash
+    - name: Test RUNNER_TEMP
+      shell: bash
+      run: |
+        echo "RUNNER_TEMP: '${{ env.RUNNER_TEMP }}', '$RUNNER_TEMP'"
     - name: Test exit
       shell: bash
       run: |
