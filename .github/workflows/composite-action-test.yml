@@ -20,3 +20,5 @@ jobs:
         shell: bash
         env:
           RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}
+      - run: |
+          echo "RUNNER_TEMP: '${{ env.RUNNER_TEMP }}', '$RUNNER_TEMP'"
