@@ -1,0 +1,43 @@
+name: Artifact test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact1-id: ${{ steps.upload-artifact1.outputs.artifact-id }}
+      artifact2-id: ${{ steps.upload-artifact2.outputs.artifact-id }}
+    steps:
+      - run: |
+          echo "hello world" > artifact.txt
+          echo "another file" > another.txt
+      - id: upload-artifact1
+        uses: actions/upload-artifact@v5
+        with:
+          name: artifact1
+          path: artifact.txt
+      - id: upload-artifact2
+        uses: actions/upload-artifact@v5
+        with:
+          name: artifact2
+          path: another.txt
+
+  download:
+    needs: [upload]
+    runs-on: ubuntu-latest
+    steps:
+      - id: download-path
+        run: |
+          echo "path=$RUNNER_TEMP" >> $GITHUB_OUTPUT
+      - uses: actions/download-artifact@v6
+        with:
+          artifact-ids: ${{ needs.upload.outputs.artifact1-id }},${{ needs.upload.outputs.artifact2-id }}
+          path: ${{ steps.download-path.outputs.path }}
+          merge-multiple: true
+      - run: |
+          ls -R ${{ steps.download-path.outputs.path }}
