@@ -33,11 +33,11 @@ jobs:
     steps:
       - id: download-path
         run: |
-          echo "path=$RUNNER_TEMP" >> $GITHUB_OUTPUT
+          echo "path=$PWD" >> $GITHUB_OUTPUT
       - uses: actions/download-artifact@v6
         with:
           artifact-ids: ${{ needs.upload.outputs.artifact1-id }},${{ needs.upload.outputs.artifact2-id }}
           path: ${{ steps.download-path.outputs.path }}
-          merge-multiple: true
+          merge-multiple: false
       - run: |
           ls -R ${{ steps.download-path.outputs.path }}
