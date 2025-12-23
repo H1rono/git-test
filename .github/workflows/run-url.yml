@@ -1,0 +1,22 @@
+name: run_url test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  RUN_URL: >-
+    ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "RUN_URL=$RUN_URL"
+          echo "JOB_URL=$JOB_URL"
+          echo "job url: $RUN_URL/job/${{ job.check_run_id }}"
+        env:
+          JOB_URL: >-
+            ${{ env.RUN_URL }}/job/${{ job.check_run_id }}
