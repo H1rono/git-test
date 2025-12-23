@@ -15,8 +15,6 @@ outputs:
 
 runs:
   using: composite
-  env:
-    TEMP: ${{ runner.temp }}
   steps:
     - name: Set Greeting
       run: echo "Hello $INPUT_WHO_TO_GREET."
@@ -32,6 +30,8 @@ runs:
       run: |
         echo "RUNNER_TEMP: '${{ env.RUNNER_TEMP }}', '$RUNNER_TEMP'"
         echo "TEMP: '$TEMP'"
+      env:
+        TEMP: ${{ runner.temp }}
     - name: Test exit
       shell: bash
       run: |
