@@ -7,10 +7,6 @@ inputs:
     description: Who to greet
     required: true
     default: World
-  temp:
-    description: temporary directory. DO NOT SET
-    required: false
-    default: ${{ runner.temp }}
 
 outputs:
   random-number:
@@ -29,13 +25,13 @@ runs:
       id: random-number-generator
       run: echo "random-number=$RANDOM" >> $GITHUB_OUTPUT
       shell: bash
+    - run: echo "TEMP=${{ runner.temp }}" >> $GITHUB_ENV
+      shell: bash
     - name: Test RUNNER_TEMP
       shell: bash
       run: |
         echo "RUNNER_TEMP: '${{ env.RUNNER_TEMP }}', '$RUNNER_TEMP'"
         echo "TEMP: '$TEMP'"
-      env:
-        TEMP: ${{ inputs.temp }}
     - name: Test exit
       shell: bash
       run: |
