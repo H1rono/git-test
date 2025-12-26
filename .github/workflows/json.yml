@@ -1,0 +1,23 @@
+name: toJSON test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          cat << EOF
+          job => $JSON_JOB
+          null => $JSON_NULL
+          false => $JSON_FALSE
+          true => $JSON_TRUE
+          EOF
+        env:
+          JSON_JOB: ${{ toJSON(job) }}
+          JSON_NULL: ${{ toJSON(null) }}
+          JSON_FALSE: ${{ toJSON(false) }}
+          JSON_TRUE: ${{ toJSON(true) }}
